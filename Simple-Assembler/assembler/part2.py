@@ -7,13 +7,16 @@ def assemble(command: str) -> str:
     """
 
     reg = {"R0": "000", "R1": "001", "R2": "010", "R3": "011", "R4": "100",
-           "R5": "101",
-           "R6": "110"}
+           "R5": "101", "R6": "110"}
     if command.split()[0] == "mul":
-        if ((reg.get("R1") is not None) and (reg.get("R2") is not None) and
-                (reg.get("R3") != None)):
-            ans = "00110" + reg.get("R1") + reg.get("R2") + reg.get("R3")
+        if ((reg.get(command.split()[1]) is not None) and
+                (reg.get(command.split()[2]) is not None) and
+                (reg.get(command.split()[3]) is not None)):
+            ans = "00110" + reg.get(command.split()[1]) + reg.get(command.split()[1])\
+                  + reg.get(command.split()[1])
+            return ans
         else:
-            return
+            return ""
+
 
     return "0"
