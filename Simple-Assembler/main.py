@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
 
-ISA ={
+ISA1 = {
+
+}
+
+ISA2 = {
+
+}
+
+ISA3 = {
 
 }
