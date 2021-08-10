@@ -12,8 +12,8 @@ def assemble(command: str) -> str:
         if ((reg.get(command.split()[1]) is not None) and
                 (reg.get(command.split()[2]) is not None) and
                 (reg.get(command.split()[3]) is not None)):
-            ans = "00110" + reg.get(command.split()[1]) + reg.get(command.split()[1])\
-                  + reg.get(command.split()[1])
+            ans = "00110" + reg.get(command.split()[1]) + reg.get(command.split()[2])\
+                  + reg.get(command.split()[3])
             return ans
         else:
             return ""
