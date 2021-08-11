@@ -13,8 +13,7 @@ def assemble(command: str) -> str:
                 (reg.get(command.split()[2]) is not None) and
                 (reg.get(command.split()[3]) is not None)):
             ans = "00110" + reg.get(command.split()[1]) + reg.get(
-                command.split()[2]) \
-                  + reg.get(command.split()[3])
+                command.split()[2]) + reg.get(command.split()[3])
             return ans
         else:
             return ""
@@ -30,16 +29,16 @@ def assemble(command: str) -> str:
 
     elif command.split()[0] == "rs" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None:
-            temp = int(command.split()[1][1:]) >> int(command.split()[2][1:])
-            ans = "01000" + str(temp)
+            ans = "01000" + reg.get(command.split()[1]) + \
+                  bin(int(command.split()[2][1:]))[2:]
             return ans
         else:
             return ""
 
     elif command.split()[0] == "ls" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None:
-            temp = int(command.split()[1][1:]) << int(command.split()[2][1:])
-            ans = "01001" + str(temp)
+            ans = "01000" + reg.get(command.split()[1]) + \
+                  bin(int(command.split()[2][1:]))[2:]
             return ans
         else:
             return ""
@@ -48,8 +47,20 @@ def assemble(command: str) -> str:
         if (reg.get(command.split()[1]) is not None) and \
             (reg.get(command.split()[2]) is not None) and \
                 (reg.get(command.split()[3]) is not None):
-            ans = "01010" + int(command.split()[1][1:])
+            ans = "01010" + reg.get(command.split()[1]) + \
+                  reg.get(command.split()[2]) + reg.get(command.split()[3])
+            return ans
+        else:
+            return ""
 
-
+    elif command.split()[0] == "or" and len(command.split()) == 4:
+        if (reg.get(command.split()[1]) is not None) and \
+            (reg.get(command.split()[2]) is not None) and \
+                (reg.get(command.split()[3]) is not None):
+            ans = "01010" + reg.get(command.split()[1]) + \
+                  reg.get(command.split()[2]) + reg.get(command.split()[3])
+            return ans
+        else:
+            return ""
 
     return "0"
