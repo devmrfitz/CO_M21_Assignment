@@ -12,7 +12,8 @@ def assemble(command: str) -> str:
         if ((reg.get(command.split()[1]) is not None) and
                 (reg.get(command.split()[2]) is not None) and
                 (reg.get(command.split()[3]) is not None)):
-            ans = "00110" + reg.get(command.split()[1]) + reg.get(command.split()[2])\
+            ans = "00110" + reg.get(command.split()[1]) + reg.get(
+                command.split()[2]) \
                   + reg.get(command.split()[3])
             return ans
         else:
@@ -21,7 +22,8 @@ def assemble(command: str) -> str:
     elif command.split()[0] == "div" and len(command.split()) > 3:
         if ((reg.get(command.split()[1]) is not None) and
                 (reg.get(command.split()[2]) is not None)):
-            ans = "00111" + reg.get(command.split()[1]) + reg.get(command.split()[2])
+            ans = "00111" + reg.get(command.split()[1]) + reg.get(
+                command.split()[2])
             return ans
         else:
             return ""
@@ -43,6 +45,5 @@ def assemble(command: str) -> str:
             return ans
         else:
             return ""
-
 
     return "0"
