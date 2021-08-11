@@ -8,7 +8,7 @@ def assemble(command: str) -> str:
 
     reg = {"R0": "000", "R1": "001", "R2": "010", "R3": "011", "R4": "100",
            "R5": "101", "R6": "110"}
-    if command.split()[0] == "mul" and len(command.split()) > 4:
+    if command.split()[0] == "mul" and len(command.split()) == 4:
         if ((reg.get(command.split()[1]) is not None) and
                 (reg.get(command.split()[2]) is not None) and
                 (reg.get(command.split()[3]) is not None)):
@@ -19,7 +19,7 @@ def assemble(command: str) -> str:
         else:
             return ""
 
-    elif command.split()[0] == "div" and len(command.split()) > 3:
+    elif command.split()[0] == "div" and len(command.split()) == 3:
         if ((reg.get(command.split()[1]) is not None) and
                 (reg.get(command.split()[2]) is not None)):
             ans = "00111" + reg.get(command.split()[1]) + reg.get(
@@ -28,22 +28,28 @@ def assemble(command: str) -> str:
         else:
             return ""
 
-    elif command.split()[0] == "rs" and len(command.split()) > 3:
+    elif command.split()[0] == "rs" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None:
-            temp = ''.join(format(ord(i), '08b') for i in command.split()[2])
-            # print (temp)
-            ans = "01000" + reg.get(command.split()[1]) + temp
+            temp = int(command.split()[1][1:]) >> int(command.split()[2][1:])
+            ans = "01000" + str(temp)
             return ans
         else:
             return ""
 
-    elif command.split()[0] == "rs" and len(command.split()) > 3:
+    elif command.split()[0] == "ls" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None:
-            temp = ''.join(format(ord(i), '08b') for i in command.split()[2])
-            # print (temp)
-            ans = "01000" + reg.get(command.split()[1]) + temp
+            temp = int(command.split()[1][1:]) << int(command.split()[2][1:])
+            ans = "01001" + str(temp)
             return ans
         else:
             return ""
+
+    elif command.split()[0] == "xor" and len(command.split()) == 4:
+        if (reg.get(command.split()[1]) is not None) and \
+            (reg.get(command.split()[2]) is not None) and \
+                (reg.get(command.split()[3]) is not None):
+            ans = "01010" + int(command.split()[1][1:])
+
+
 
     return "0"
