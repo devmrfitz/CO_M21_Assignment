@@ -6,13 +6,27 @@ import part1
 import part2
 import part3
 
+
+def remove_items(input_list, item):
+    return [i for i in input_list if i != item]
+
+
 commands = sys.stdin.read().split("\n")[:-1]
+print(commands)
 assemblers = [part1.assemble, part2.assemble, part3.assemble]
 
 variables = {}
 
 labels = {}
 
+commands = remove_items(commands, "")
+
+
+first_non_var = 0
+while first_non_var < len(commands) and commands[first_non_var].startswith("var"):
+    first_non_var += 1
+
+code_size = len(commands)-first_non_var
 # Store variables
 while commands[0].startswith("var"):
     command_split = commands[0].split(" ")
@@ -20,7 +34,11 @@ while commands[0].startswith("var"):
         print("Line " + str(len(variables)) + ": ERR: Syntax error")
         exit()
     else:
-        variables[command_split[1]] = 2 * len(variables) + len(commands)
+        variables[command_split[1]] = bin(code_size)[2:]
+
+        while len(variables[command_split[1]]) < 8:
+            variables[command_split[1]] = "0" + variables[command_split[1]]
+
         commands = commands[1:]
     while not commands[0] and len(commands) != 0:
         commands = commands[1:]
@@ -31,13 +49,20 @@ for index in range(len(commands)):
     command_split = command.split(" ")
     if command_split[0].endswith(":"):
         if command_split[0][:-1].replace('_', "").isalnum():
-            labels[command_split[0][:-1]] = index
+            labels[command_split[0][:-1]] = bin(index)[2:]
+
+            while len(labels[command_split[0][:-1]]) < 8:
+                labels[command_split[0][:-1]] = "0" + labels[command_split[0][:-1]]
+
+            commands[index] = " ".join(command_split)
         else:
             print("Line " + str(index + len(variables)) + ": Invalid label name")
             exit()
 
 for index in range(len(commands) - 1):
     command = commands[index]
+    while command.startswith(" "):
+        command = command[1:]
 
     if command.startswith("var"):
         print("Line " + str(index + len(variables)) + ": ERR: var called in-between program")
@@ -76,7 +101,7 @@ for index in range(len(commands) - 1):
     else:
         response = ""
         for assembler in assemblers:
-            response = assembler(command)
+            response = assembler(command, index + len(variables))
             if response:
                 break
 

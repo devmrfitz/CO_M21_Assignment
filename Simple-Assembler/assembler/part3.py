@@ -14,8 +14,9 @@ ISA = {
 }
 
 
-def assemble(command: str) -> str:
+def assemble(command: str, line_num: int) -> str:
     """
+    :param line_num:
     :param command: add R0 R1 R2
     :return: 0000000000001010
     """
