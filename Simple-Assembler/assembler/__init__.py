@@ -112,7 +112,7 @@ for index in range(len(commands) - 1):
             exit()
 
 if commands[-1] == "hlt":
-    print("10011000000000")
+    print("1001100000000000")
 else:
     print("Line " + str(len(commands) + len(variables) - 1) + ": ERR: Last command isn't HALT")
     exit()
