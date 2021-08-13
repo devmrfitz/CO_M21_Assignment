@@ -26,17 +26,12 @@ def assemble(command: str, line_num: int) -> str:
                     print("Syntax Error: Illegal use of FLAGS register")
                     exit()
 
-                final_bin += isa[instruct][0] +"00"
+                final_bin += isa[instruct][0] + "00"
 
                 if "$" in command[1:]:
                     print("Error in line no.", end="")
                     print(line_num)
                     print("Syntax Error: Type B instruction format used in Type A instruction")
-                else:
-                    print("Error in line no.", end="")
-                    print(line_num)
-                    print("Syntax Error: Typo in register name")
-                exit()
 
                 for i in range(1, types[isa[instruct][1]]):
                     reg_x = reg.get(command[i])
