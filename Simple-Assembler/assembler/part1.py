@@ -12,40 +12,77 @@ def assemble(command: str, line_num: int) -> str:
     final_bin = ""
     if (instruct in isa) and instruct != "mov":
         if len(command) != types[isa[instruct][1]]:
-            return ""
+            print("Error in line no.", end="")
+            print(line_num)
+            print("Syntax Error: Invalid Number of Arguments")
+            exit()
         else:
             if isa[instruct][1] == "A":
+                if "FLAGS" in command:
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Illegal use of FLAGS register")
+                    exit()
                 final_bin += isa[instruct][0]
                 for i in range(1, types[isa[instruct][1]]):
                     reg_x = reg.get(command[i])
                     if reg_x is not None:
                         final_bin += reg_x
                     else:
-                        return " "
+                        print("Error in line no.", end="")
+                        print(line_num)
+                        if("$" in command[1:]):
+                            print("Syntax Error: Type B instruction format used in Type A instruction")
+                        else:
+                            print("Syntax Error: Typo in register name")
+                        exit()
                 return final_bin
             elif isa[instruct][1] == "D":
+                if "FLAGS" in command:
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Illegal use of FLAGS register")
+                    exit()
                 final_bin += isa[instruct][0]
                 reg_x = reg.get(command[1])
                 if reg_x is not None:
                     final_bin += reg_x
                 else:
-                    return ""
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    if "$" in command[1:]:
+                        print("Syntax Error: Type B instruction format used in Type D instruction")
+                    else:
+                        print("Syntax Error: Typo in register name")
+                        exit()
                 final_bin += command[2]
                 return final_bin
-            else:
-                return ""
     elif instruct == "mov":
         if len(command) != 3:
-            return ""
+            print("Error in line no.", end="")
+            print(line_num)
+            print("Syntax Error: Invalid Number of Arguments")
+            exit()
         else:
+            if "FLAGS" in command:
+                print("Error in line no.", end="")
+                print(line_num)
+                print("Syntax Error: Illegal use of FLAGS register")
+                exit()
             if "$" in command[2]:
                 final_bin += isa[instruct][0][0]
                 if command[1] in reg:
                     final_bin += reg[command[1]]
                 else:
-                    return ""
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Typo in register name")
+                    exit()
                 if int(command[2][1:]) > 255 or int(command[2][1:]) < 0:
-                    return ""
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Illegal Immediate values")
+                    exit()
                 else:
                     bin_num = bin(int(command[2][1:]))[2:]
                     while len(bin_num) != 8:
@@ -57,11 +94,23 @@ def assemble(command: str, line_num: int) -> str:
                 if command[1] in reg:
                     final_bin += reg[command[1]]
                 else:
-                    return ""
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Typo in register name")
+                    exit()
                 if command[2] in reg:
                     final_bin += reg[command[2]]
                 else:
-                    return ""
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Typo in register name")
+                    exit()
                 return final_bin
     else:
-        return ""
+        if isa[instruct] is None:
+            print("Error in line no.", end="")
+            print(line_num)
+            print("Syntax Error: Typo in instruction name")
+            exit()
+        else:
+            exit()
