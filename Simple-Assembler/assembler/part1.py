@@ -18,10 +18,10 @@ def assemble(command: str, line_num: int) -> str:
                 final_bin += isa[instruct][0]
                 for i in range(1, types[isa[instruct][1]]):
                     reg_x = reg.get(command[i])
-                    if reg is not None:
+                    if reg_x is not None:
                         final_bin += reg_x
                     else:
-                        return ""
+                        return " "
                 return final_bin
             elif isa[instruct][1] == "D":
                 final_bin += isa[instruct][0]
