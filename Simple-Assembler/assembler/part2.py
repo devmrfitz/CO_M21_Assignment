@@ -21,6 +21,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
@@ -35,6 +36,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
@@ -48,6 +50,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
@@ -61,6 +64,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
@@ -76,6 +80,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
@@ -91,6 +96,7 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(command)
                     return ""
             print("Line " + line_num + ": ERR: Wrong register")
             return ""
