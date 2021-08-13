@@ -121,7 +121,7 @@ def assemble(command: str, line_num: int) -> str:
                     exit()
                 return final_bin
     else:
-        if isa[instruct] is None:
+        if isa.get(instruct) is None:
             print("Error in line no.", end="")
             print(line_num)
             print("Syntax Error: Typo in instruction name")
