@@ -40,15 +40,22 @@ def assemble(command: str, line_num: int) -> str:
             if not reg_address:
                 if command[i] == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    exit()
+                elif "$" in command[i]:
+                    print("Line " + line_num + ": ERR: Type B syntax detected in unexpected position")
+                    exit()
                 else:
                     print("Line " + line_num + ": ERR: Wrong register")
-                exit()
+                    exit()
             else:
                 suffix += reg_address
 
         for i in range(raw_response[1] + 1, raw_response[1] + raw_response[2] + 1):
             if len(command[i]) == 8:
                 suffix += command[i]
+            elif "$" in command[i]:
+                print("Line " + line_num + ": ERR: Type B syntax detected in unexpected position")
+                exit()
             else:
                 print("Line " + line_num + ": ERR: Invalid mem_addr")
                 exit()
