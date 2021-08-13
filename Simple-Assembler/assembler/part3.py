@@ -59,7 +59,7 @@ def assemble(command: str, line_num: int) -> str:
             else:
                 print("Line " + line_num + ": ERR: Invalid mem_addr")
                 exit()
-        response += "0"*(21-len(response)-len(suffix)) + suffix
+        response += "0"*(16-len(response)-len(suffix)) + suffix
 
     return response
 

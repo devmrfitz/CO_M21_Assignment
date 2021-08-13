@@ -54,7 +54,7 @@ for index in range(len(commands)):
             while len(labels[command_split[0][:-1]]) < 8:
                 labels[command_split[0][:-1]] = "0" + labels[command_split[0][:-1]]
 
-            commands[index] = " ".join(command_split)
+            commands[index] = " ".join(command_split[1:])
         else:
             print("Line " + str(index + len(variables)) + ": ERR: Invalid label name")
             exit()
@@ -69,9 +69,6 @@ for index in range(len(commands) - 1):
         exit()
 
     command_split = command.split(" ")
-    if command_split[0].endswith(":"):
-        command_split = command_split[1:]
-        command = " ".join(command_split)
 
     if command_split[0] == "st" or command_split[0] == "ld":
         if len(command_split) != 3:
