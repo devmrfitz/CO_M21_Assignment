@@ -65,4 +65,4 @@ def assemble(command: str, line_num: int) -> str:
         else:
             return ""
 
-    return "0"
+    return ""
