@@ -7,7 +7,7 @@ import part2
 import part3
 
 
-def remove_items(input_list, item):
+def remove_items(input_list: list, item) -> list:
     return [i for i in input_list if i != item]
 
 
@@ -57,43 +57,56 @@ for index in range(len(commands)):
             commands[index] = " ".join(command_split[1:])
         else:
             print("Line " + str(index + len(variables)) + ": ERR: Invalid label name")
+            print(command)
             exit()
 
 for index in range(len(commands) - 1):
+
+    while commands[index].startswith(" "):
+        commands[index] = commands[index][1:]
+
+    while commands[index].endswith(" "):
+        commands[index] = commands[index][:-1]
+
     command = commands[index]
-    while command.startswith(" "):
-        command = command[1:]
 
     if command.startswith("var"):
         print("Line " + str(index + len(variables)) + ": ERR: var called in-between program")
+        print(command)
         exit()
 
     command_split = command.split(" ")
 
+
     if command_split[0] == "st" or command_split[0] == "ld":
         if len(command_split) != 3:
             print("Line " + str(index + len(variables)) + ": ERR: Invalid syntax")
+            print(command)
             exit()
         if variables.get(command_split[2]):
             command_split[2] = variables.get(command_split[2])
         else:
             print("Line " + str(index + len(variables)) + ": ERR: Variable not found")
+            print(command)
             exit()
         command = " ".join(command_split)
 
     elif command_split[0].startswith("j"):
         if len(command_split) != 2:
             print("Line " + str(index + len(variables)) + ": ERR: Invalid syntax")
+            print(command)
             exit()
         if labels.get(command_split[1]):
             command_split[1] = labels.get(command_split[1])
         else:
             print("Line " + str(index + len(variables)) + ": ERR: Label not found")
+            print(command)
             exit()
         command = " ".join(command_split)
 
     if command == "hlt":
         print("Line " + str(index + len(variables)) + ": ERR: HALT found in between")
+        print(command)
         exit()
     else:
         response = ""
@@ -106,10 +119,12 @@ for index in range(len(commands) - 1):
             print(response)
         else:
             print("Line " + str(index + len(variables)) + ": ERR: COMMAND NOT FOUND")
+            print(command)
             exit()
 
 if commands[-1] == "hlt":
     print("1001100000000000", end=" ")
 else:
     print("Line " + str(len(commands) + len(variables) - 1) + ": ERR: Last command isn't HALT")
+    print(commands[-1])
     exit()

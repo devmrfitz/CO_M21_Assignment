@@ -31,6 +31,7 @@ def assemble(command: str, line_num: int) -> str:
     if raw_response:
         if len(command) != 1+sum(raw_response[1:]):
             print("Line " + line_num + ": ERR: Incorrect number of arguments")
+            print(" ".join(command))
             exit()
         response += raw_response[0]
         suffix = ""
@@ -40,12 +41,15 @@ def assemble(command: str, line_num: int) -> str:
             if not reg_address:
                 if command[i] == "FLAGS":
                     print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print(" ".join(command))
                     exit()
                 elif "$" in command[i]:
                     print("Line " + line_num + ": ERR: Type B syntax detected in unexpected position")
+                    print(" ".join(command))
                     exit()
                 else:
                     print("Line " + line_num + ": ERR: Wrong register")
+                    print(" ".join(command))
                     exit()
             else:
                 suffix += reg_address
@@ -55,9 +59,11 @@ def assemble(command: str, line_num: int) -> str:
                 suffix += command[i]
             elif "$" in command[i]:
                 print("Line " + line_num + ": ERR: Type B syntax detected in unexpected position")
+                print(" ".join(command))
                 exit()
             else:
                 print("Line " + line_num + ": ERR: Invalid mem_addr")
+                print(" ".join(command))
                 exit()
         response += "0"*(16-len(response)-len(suffix)) + suffix
 
