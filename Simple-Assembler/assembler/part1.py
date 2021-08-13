@@ -11,11 +11,13 @@ def assemble(command: str, line_num: int) -> str:
     instruct = command[0]
     final_bin = ""
     if (instruct in isa) and instruct != "mov":
+
         if len(command) != types[isa[instruct][1]]:
             print("Error in line no.", end="")
             print(line_num)
             print("Syntax Error: Invalid Number of Arguments")
             exit()
+
         else:
             if isa[instruct][1] == "A":
                 if "FLAGS" in command:
@@ -23,7 +25,19 @@ def assemble(command: str, line_num: int) -> str:
                     print(line_num)
                     print("Syntax Error: Illegal use of FLAGS register")
                     exit()
-                final_bin += isa[instruct][0]
+
+                final_bin += isa[instruct][0] +"00"
+
+                if "$" in command[1:]:
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Type B instruction format used in Type A instruction")
+                else:
+                    print("Error in line no.", end="")
+                    print(line_num)
+                    print("Syntax Error: Typo in register name")
+                exit()
+
                 for i in range(1, types[isa[instruct][1]]):
                     reg_x = reg.get(command[i])
                     if reg_x is not None:
@@ -31,20 +45,21 @@ def assemble(command: str, line_num: int) -> str:
                     else:
                         print("Error in line no.", end="")
                         print(line_num)
-                        if("$" in command[1:]):
-                            print("Syntax Error: Type B instruction format used in Type A instruction")
-                        else:
-                            print("Syntax Error: Typo in register name")
+                        print("Syntax Error: Typo in register name")
                         exit()
+
                 return final_bin
+
             elif isa[instruct][1] == "D":
                 if "FLAGS" in command:
                     print("Error in line no.", end="")
                     print(line_num)
                     print("Syntax Error: Illegal use of FLAGS register")
                     exit()
+
                 final_bin += isa[instruct][0]
                 reg_x = reg.get(command[1])
+
                 if reg_x is not None:
                     final_bin += reg_x
                 else:
@@ -55,20 +70,24 @@ def assemble(command: str, line_num: int) -> str:
                     else:
                         print("Syntax Error: Typo in register name")
                         exit()
+
                 final_bin += command[2]
                 return final_bin
+
     elif instruct == "mov":
         if len(command) != 3:
             print("Error in line no.", end="")
             print(line_num)
             print("Syntax Error: Invalid Number of Arguments")
             exit()
+
         else:
             if "FLAGS" in command:
                 print("Error in line no.", end="")
                 print(line_num)
                 print("Syntax Error: Illegal use of FLAGS register")
                 exit()
+
             if "$" in command[2]:
                 final_bin += isa[instruct][0][0]
                 if command[1] in reg:
@@ -90,7 +109,7 @@ def assemble(command: str, line_num: int) -> str:
                     final_bin += bin_num
                 return final_bin
             else:
-                final_bin += isa[instruct][1][0]
+                final_bin += isa[instruct][1][0] + "00000"
                 if command[1] in reg:
                     final_bin += reg[command[1]]
                 else:
@@ -112,5 +131,4 @@ def assemble(command: str, line_num: int) -> str:
             print(line_num)
             print("Syntax Error: Typo in instruction name")
             exit()
-        else:
-            exit()
+        exit()
