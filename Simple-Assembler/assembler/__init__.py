@@ -12,7 +12,7 @@ def remove_items(input_list, item):
 
 
 commands = sys.stdin.read().split("\n")[:-1]
-print(commands)
+
 assemblers = [part1.assemble, part2.assemble, part3.assemble]
 
 variables = {}
@@ -56,7 +56,7 @@ for index in range(len(commands)):
 
             commands[index] = " ".join(command_split)
         else:
-            print("Line " + str(index + len(variables)) + ": Invalid label name")
+            print("Line " + str(index + len(variables)) + ": ERR: Invalid label name")
             exit()
 
 for index in range(len(commands) - 1):

@@ -22,14 +22,16 @@ def assemble(command: str, line_num: int) -> str:
     """
     command = command.split()
 
+    line_num = str(line_num)
+
     response = ""
 
     raw_response = ISA.get(command[0])
 
     if raw_response:
         if len(command) != 1+sum(raw_response[1:]):
-            print("ERR: Incorrect number of arguments")
-            pass
+            print("Line " + line_num + ": ERR: Incorrect number of arguments")
+            exit()
         response += raw_response[0]
         suffix = ""
 
@@ -37,10 +39,10 @@ def assemble(command: str, line_num: int) -> str:
             reg_address = reg.get(command[i])
             if not reg_address:
                 if command[i] == "FLAGS":
-                    print("ERR: Illegal use of FLAGS")
+                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
                 else:
-                    print("ERR: Wrong register")
-                pass
+                    print("Line " + line_num + ": ERR: Wrong register")
+                exit()
             else:
                 suffix += reg_address
 
@@ -48,12 +50,12 @@ def assemble(command: str, line_num: int) -> str:
             if len(command[i]) == 8:
                 suffix += command[i]
             else:
-                print("ERR: Invalid mem_addr")
-                pass
+                print("Line " + line_num + ": ERR: Invalid mem_addr")
+                exit()
         response += "0"*(21-len(response)-len(suffix)) + suffix
 
     return response
 
 
 if __name__ == "__main__":
-    print(assemble(input()))
+    print(assemble(input(), 0))
