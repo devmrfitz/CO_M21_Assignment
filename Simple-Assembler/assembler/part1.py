@@ -14,18 +14,21 @@ def assemble(command: str, line_num: int) -> str:
 
         if len(command) != types[isa[instruct][1]]:
             print("Error in Line " + str(line_num) + " Syntax Error: Invalid Number of Arguments")
+            print(" ".join(command))
             exit()
 
         else:
             if isa[instruct][1] == "A":
                 if "FLAGS" in command:
                     print("Error in Line " + str(line_num) + " Syntax Error: Illegal use of FLAGS register")
+                    print(" ".join(command))
                     exit()
 
                 final_bin += isa[instruct][0] + "00"
 
                 if "$" in command[1:]:
                     print("Error in Line" + str(line_num) + " Syntax Error: Type B instruction format used in Type A instruction")
+                    print(" ".join(command))
 
                 for i in range(1, types[isa[instruct][1]]):
                     reg_x = reg.get(command[i])
@@ -33,6 +36,7 @@ def assemble(command: str, line_num: int) -> str:
                         final_bin += reg_x
                     else:
                         print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
+                        print(" ".join(command))
                         exit()
 
                 return final_bin
@@ -40,6 +44,7 @@ def assemble(command: str, line_num: int) -> str:
             elif isa[instruct][1] == "D":
                 if "FLAGS" in command:
                     print("Error in Line " + str(line_num) + "Syntax Error: Illegal use of FLAGS register")
+                    print(" ".join(command))
                     exit()
 
                 final_bin += isa[instruct][0]
@@ -51,9 +56,11 @@ def assemble(command: str, line_num: int) -> str:
 
                     if "$" in command[1:]:
                         print("Error in Line " + str(line_num) + " Syntax Error: Type B instruction format used in Type D instruction")
+                        print(" ".join(command))
                         exit()
                     else:
                         print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
+                        print(" ".join(command))
                         exit()
 
                 final_bin += command[2]
@@ -62,6 +69,7 @@ def assemble(command: str, line_num: int) -> str:
     elif instruct == "mov":
         if len(command) != 3:
             print("Error in line no." + str(line_num) + "Syntax Error: Invalid Number of Arguments")
+            print(" ".join(command))
             exit()
 
         else:
@@ -72,9 +80,11 @@ def assemble(command: str, line_num: int) -> str:
                     final_bin += reg[command[1]]
                 else:
                     print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
+                    print(" ".join(command))
                     exit()
                 if int(command[2][1:]) > 255 or int(command[2][1:]) < 0:
                     print("Error in Line " + str(line_num) + "Syntax Error: Illegal Immediate values")
+                    print(" ".join(command))
                     exit()
                 else:
                     bin_num = bin(int(command[2][1:]))[2:]
@@ -88,9 +98,11 @@ def assemble(command: str, line_num: int) -> str:
                     final_bin += reg[command[1]]
                 elif command[1] == "FLAGS":
                     print("Error in Line " + str(line_num) + " Syntax Error: Illegal use of FLAGS register")
+                    print(" ".join(command))
                     exit()
                 else:
                     print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
+                    print(" ".join(command))
                     exit()
                 if command[2] in reg:
                     final_bin += reg[command[2]]
@@ -98,6 +110,7 @@ def assemble(command: str, line_num: int) -> str:
                     final_bin += "111"
                 else:
                     print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
+                    print(" ".join(command))
                     exit()
                 return final_bin
     else:
