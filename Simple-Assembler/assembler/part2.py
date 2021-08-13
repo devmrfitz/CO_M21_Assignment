@@ -20,10 +20,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line "+str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     elif command.split()[0] == "div" and len(command.split()) == 3:
@@ -35,10 +35,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     elif command.split()[0] == "rs" and len(command.split()) == 3:
@@ -49,10 +49,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     elif command.split()[0] == "ls" and len(command.split()) == 3:
@@ -63,10 +63,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     elif command.split()[0] == "xor" and len(command.split()) == 4:
@@ -79,10 +79,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     elif command.split()[0] == "or" and len(command.split()) == 4:
@@ -95,10 +95,10 @@ def assemble(command: str, line_num: int) -> str:
         else:
             for i in command.split():
                 if i == "FLAGS":
-                    print("Line " + line_num + ": ERR: Illegal use of FLAGS")
+                    print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     return ""
-            print("Line " + line_num + ": ERR: Wrong register")
+            print("Line " + str(line_num) + ": ERR: Wrong register")
             return ""
 
     return ""
