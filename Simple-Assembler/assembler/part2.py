@@ -57,13 +57,13 @@ def assemble(command: str, line_num: int) -> str:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$"\
         and (int(command.split()[2][1:]) >= 0 and (int(command.split()[2][1:]) <= 255)
         and command.split()[2][1:].isnumeric()):
-            if len(bin(int(command.split()[2][1:]))) != 8:
+            if len(bin(int(command.split()[2][1:]))[2:]) != 8:
                 temp = 8 - len(bin(int(command.split()[2][1:])))
-                temp1 = ("0" * temp) + "00"+ (bin(int(command.split()[2][1:]))[2:])
+                temp1 = ("0" * temp) + (bin(int(command.split()[2][1:]))[2:])
                 ans = "01000" + reg.get(command.split()[1]) + temp1
                 return ans
             else:
-                ans = "01000" + reg.get(command.split()[1]) + bin(int(command.split()[2][1:]))
+                ans = "01000" + reg.get(command.split()[1]) + bin(int(command.split()[2][2:]))
                 return ans
         else:
             for i in command.split():
@@ -91,15 +91,14 @@ def assemble(command: str, line_num: int) -> str:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$" \
                 and (int(command.split()[2][1:]) >= 0 and int(command.split()[2][1:]) <= 255
         and command.split()[2][1:].isnumeric()):
-            if len(bin(int(command.split()[2][1:]))) != 8:
+            if len(bin(int(command.split()[2][1:]))[2:]) != 8:
                 temp1 = ""
                 temp = 8 - len(bin(int(command.split()[2][1:])))
                 temp1 = ("0" * temp) + "00" +(bin(int(command.split()[2][1:]))[2:])
                 ans = "01000" + reg.get(command.split()[1]) + temp1
                 return ans
             else:
-                ans = "01000" + reg.get(command.split()[1]) + bin(
-                    int(command.split()[2][1:]))
+                ans = "01000" + reg.get(command.split()[1]) + bin(int(command.split()[2][1:]))[2:]
                 return ans
         else:
             for i in command.split():
