@@ -4,7 +4,6 @@ add R1 R2 R3
 sub R1 R2 R3
 mov R1 $23
 mov R6 $78
-mov R3 $90
 mov R1 R2
 mov R3 R6
 ld R1 x
