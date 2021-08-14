@@ -1,0 +1,21 @@
+var x
+var t
+add reg1 reg2 reg3
+add reg3 reg4 reg3
+add reg3 reg2 reg1
+add reg5 reg6 reg6
+add reg1 reg1 reg3
+sub reg1 reg2 reg3
+sub reg5 reg4 reg2
+sub reg1 reg6 reg2
+sub reg4 reg6 reg2
+mov reg1 $23
+mov reg6 $78
+mov reg3 $90
+mov reg1 reg2
+mov reg3 reg6
+ld reg1 x
+ld reg3 x
+st reg0 t
+st reg3 t
+hlt
