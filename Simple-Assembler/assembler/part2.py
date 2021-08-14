@@ -22,9 +22,9 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line "+str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     elif command.split()[0] == "div" and len(command.split()) == 3:
         if ((reg.get(command.split()[1]) is not None) and
@@ -37,9 +37,9 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     elif command.split()[0] == "rs" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$"\
@@ -53,16 +53,17 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
             if command.split()[2][0:1] != "$":
                 print(command)
-                return "Line " + str(line_num) + ":Syntax Error: Illegal Immediate values"
-
+                print("Line " + str(line_num) + ":Syntax Error: Illegal Immediate values")
+                exit()
             elif 255 > int(command.split()[2][1:]) or int(command.split()[2][1:]) < 0:
+                print("Line " + str(line_num) + ": ERR: Wrong Limit used")
                 print(command)
-                return "Line " + str(line_num) + ": ERR: Wrong Limit used"
+                exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     elif command.split()[0] == "ls" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$" \
@@ -76,18 +77,19 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
             if command.split()[2][0:1] != "$":
+                print("Line " + str(
+                    line_num) + ":Syntax Error: Illegal Immediate values")
                 print(command)
-                return "Line " + str(
-                    line_num) + ":Syntax Error: Illegal Immediate values"
-
+                exit()
             elif 255 > int(command.split()[2][1:]) or int(
                     command.split()[2][1:]) < 0:
                 print(command)
-                return "Line " + str(line_num) + ": ERR: Wrong Limit used"
+                print("Line " + str(line_num) + ": ERR: Wrong Limit used")
+                exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     elif command.split()[0] == "xor" and len(command.split()) == 4:
         if (reg.get(command.split()[1]) is not None) and \
@@ -101,9 +103,9 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     elif command.split()[0] == "or" and len(command.split()) == 4:
         if (reg.get(command.split()[1]) is not None) and \
