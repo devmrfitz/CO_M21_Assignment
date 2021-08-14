@@ -95,10 +95,10 @@ def assemble(command: str, line_num: int) -> str:
                 temp1 = ""
                 temp = 8 - len(bin(int(command.split()[2][1:])))
                 temp1 = ("0" * temp) + "00" +(bin(int(command.split()[2][1:]))[2:])
-                ans = "01001" + reg.get(command.split()[1]) + temp1
+                ans = "01000" + reg.get(command.split()[1]) + temp1
                 return ans
             else:
-                ans = "01001" + reg.get(command.split()[1]) + bin(
+                ans = "01000" + reg.get(command.split()[1]) + bin(
                     int(command.split()[2][1:]))
                 return ans
         else:
