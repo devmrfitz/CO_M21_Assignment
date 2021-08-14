@@ -23,6 +23,12 @@ def assemble(command: str, line_num: int) -> str:
                     print("Line "+str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
+            for i in range (len(command.split())):
+                if command.split()[i][0:1] != "r":
+                    print("Error in Line " + str(line_num) + " Syntax Error:")
+                    print(command)
+                    exit()
+            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
             exit()
 
@@ -36,6 +42,11 @@ def assemble(command: str, line_num: int) -> str:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
+                    print(command)
+                    exit()
+            for i in range (len(command.split())):
+                if command.split()[i][0:1] != "r":
+                    print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
@@ -54,6 +65,10 @@ def assemble(command: str, line_num: int) -> str:
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
+            if command.split()[1][0:1] != "r":
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             if command.split()[2][0:1] != "$":
                 print(command)
                 print("Line " + str(line_num) + ":Syntax Error: Illegal Immediate values")
@@ -78,7 +93,11 @@ def assemble(command: str, line_num: int) -> str:
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            if command.split()[2][0:1] != "$":
+            if command.split()[1][0:1] != "r":
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
+            elif command.split()[2][0:1] != "$":
                 print("Line " + str(
                     line_num) + ":Syntax Error: Illegal Immediate values")
                 print(command)
@@ -104,6 +123,11 @@ def assemble(command: str, line_num: int) -> str:
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
+            for i in range (len(command.split())):
+                if command.split()[i][0:1] != "r":
+                    print("Error in Line " + str(line_num) + " Syntax Error:")
+                    print(command)
+                    exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
             exit()
 
@@ -119,8 +143,15 @@ def assemble(command: str, line_num: int) -> str:
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
-                    return ""
+                    exit()
+            for i in range(len(command.split())):
+                if command.split()[i][0:1] != "r":
+                    print("Error in Line " + str(
+                        line_num) + " Syntax Error:")
+                    print(command)
+                    exit()
+            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
-            return ""
+            exit()
 
     return ""
