@@ -37,7 +37,7 @@ while commands[0].startswith("var"):
         print(commands[0])
         exit()
     else:
-        variables[command_split[1]] = bin(code_size)[2:]
+        variables[command_split[1]] = bin(code_size+len(variables))[2:]
 
         while len(variables[command_split[1]]) < 8:
             variables[command_split[1]] = "0" + variables[command_split[1]]
