@@ -49,6 +49,7 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
+            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
             exit()
 
@@ -77,6 +78,7 @@ def assemble(command: str, line_num: int) -> str:
                 print("Line " + str(line_num) + ": ERR: Wrong Limit used")
                 print(command)
                 exit()
+            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
             exit()
 
@@ -128,6 +130,7 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
+            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
             exit()
 
