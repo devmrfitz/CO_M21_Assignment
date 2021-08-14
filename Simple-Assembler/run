@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Add command to run your program here
-python assembler/__init__.py
+python assembler
