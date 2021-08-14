@@ -28,8 +28,8 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
-            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     elif command.split()[0] == "div" and len(command.split()) == 3:
@@ -49,8 +49,8 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
-            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     elif command.split()[0] == "rs" and len(command.split()) == 3:
@@ -83,8 +83,8 @@ def assemble(command: str, line_num: int) -> str:
                 print("Line " + str(line_num) + ": ERR: Wrong Limit used")
                 print(command)
                 exit()
-            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     elif command.split()[0] == "ls" and len(command.split()) == 3:
@@ -111,16 +111,16 @@ def assemble(command: str, line_num: int) -> str:
                 print(command)
                 exit()
             elif command.split()[2][0:1] != "$":
-                print("Line " + str(
-                    line_num) + ":Syntax Error: Illegal Immediate values")
+                print("Line " + str(line_num) + ":Syntax Error: Illegal Immediate values")
                 print(command)
                 exit()
             elif 255 > int(command.split()[2][1:]) or int(
                     command.split()[2][1:]) < 0:
-                print(command)
                 print("Line " + str(line_num) + ": ERR: Wrong Limit used")
+                print(command)
                 exit()
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     elif command.split()[0] == "xor" and len(command.split()) == 4:
@@ -141,8 +141,8 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
-            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     elif command.split()[0] == "or" and len(command.split()) == 4:
@@ -160,12 +160,11 @@ def assemble(command: str, line_num: int) -> str:
                     exit()
             for i in range(len(command.split())):
                 if command.split()[i][0:1] != "R":
-                    print("Error in Line " + str(
-                        line_num) + " Syntax Error:")
+                    print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
-            print(command)
             print("Line " + str(line_num) + ": ERR: Wrong register")
+            print(command)
             exit()
 
     return ""
