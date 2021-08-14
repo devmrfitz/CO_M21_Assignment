@@ -93,6 +93,8 @@ def assemble(command: str, line_num: int) -> str:
                             bin_num = "0" + bin_num
                         final_bin += bin_num
                 else:
+                    print("Error in Line " + str(line_num) + "Syntax Error: Illegal Immediate values")
+                    print(" ".join(command))
                     exit()
                 return final_bin
             else:
