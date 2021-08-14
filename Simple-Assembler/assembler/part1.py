@@ -82,10 +82,11 @@ def assemble(command: str, line_num: int) -> str:
                     print("Error in Line " + str(line_num) + " Syntax Error: Typo in register name")
                     print(" ".join(command))
                     exit()
-                if int(command[2][1:]) > 255 or int(command[2][1:]) < 0:
-                    print("Error in Line " + str(line_num) + "Syntax Error: Illegal Immediate values")
-                    print(" ".join(command))
-                    exit()
+                if command[2][1:].isnumeric():
+                    if int(command[2][1:]) > 255 or int(command[2][1:]) < 0:
+                        print("Error in Line " + str(line_num) + "Syntax Error: Illegal Immediate values")
+                        print(" ".join(command))
+                        exit()
                 else:
                     bin_num = bin(int(command[2][1:]))[2:]
                     while len(bin_num) != 8:
