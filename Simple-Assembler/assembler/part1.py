@@ -87,11 +87,13 @@ def assemble(command: str, line_num: int) -> str:
                         print("Error in Line " + str(line_num) + "Syntax Error: Illegal Immediate values")
                         print(" ".join(command))
                         exit()
+                    else:
+                        bin_num = bin(int(command[2][1:]))[2:]
+                        while len(bin_num) != 8:
+                            bin_num = "0" + bin_num
+                        final_bin += bin_num
                 else:
-                    bin_num = bin(int(command[2][1:]))[2:]
-                    while len(bin_num) != 8:
-                        bin_num = "0" + bin_num
-                    final_bin += bin_num
+                    exit()
                 return final_bin
             else:
                 final_bin += isa[instruct][1][0] + "00000"
