@@ -24,7 +24,7 @@ def assemble(command: str, line_num: int) -> str:
                     print(command)
                     exit()
             for i in range (len(command.split())):
-                if command.split()[i][0:1] != "r":
+                if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
@@ -45,7 +45,7 @@ def assemble(command: str, line_num: int) -> str:
                     print(command)
                     exit()
             for i in range (len(command.split())):
-                if command.split()[i][0:1] != "r":
+                if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
@@ -55,18 +55,24 @@ def assemble(command: str, line_num: int) -> str:
 
     elif command.split()[0] == "rs" and len(command.split()) == 3:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$"\
-                and (int(command.split()[2][1:]) > 0 and int(command.split()[2][1:]) <= 255
+        and (int(command.split()[2][1:]) > 0 and (int(command.split()[2][1:]) <= 255)
         and command.split()[2][1:].isnumeric()):
-            ans = "01000" + reg.get(command.split()[1]) + \
-                  bin(int(command.split()[2][1:]))[2:]
-            return ans
+            if len(bin(int(command.split()[2][1:]))) != 8:
+                temp1 = ""
+                temp = 8 - len(bin(int(command.split()[2][1:])))
+                temp1 = ("0" * temp) + bin(int(command.split()[2][1:]))
+                ans = "01000" + reg.get(command.split()[1]) + temp1
+                return ans
+            else:
+                ans = "01000" + reg.get(command.split()[1]) + bin(int(command.split()[2][1:]))
+                return ans
         else:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            if command.split()[1][0:1] != "r":
+            if command.split()[1][0:1] != "R":
                 print("Error in Line " + str(line_num) + " Syntax Error:")
                 print(command)
                 exit()
@@ -86,16 +92,23 @@ def assemble(command: str, line_num: int) -> str:
         if reg.get(command.split()[1]) is not None and command.split()[2][0:1] == "$" \
                 and (int(command.split()[2][1:]) > 0 and int(command.split()[2][1:]) <= 255
         and command.split()[2][1:].isnumeric()):
-            ans = "01000" + reg.get(command.split()[1]) + \
-                  bin(int(command.split()[2][1:]))[2:]
-            return ans
+            if len(bin(int(command.split()[2][1:]))) != 8:
+                temp1 = ""
+                temp = 8 - len(bin(int(command.split()[2][1:])))
+                temp1 = ("0" * temp) + bin(int(command.split()[2][1:]))
+                ans = "01000" + reg.get(command.split()[1]) + temp1
+                return ans
+            else:
+                ans = "01000" + reg.get(command.split()[1]) + bin(
+                    int(command.split()[2][1:]))
+                return ans
         else:
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            if command.split()[1][0:1] != "r":
+            if command.split()[1][0:1] != "R":
                 print("Error in Line " + str(line_num) + " Syntax Error:")
                 print(command)
                 exit()
@@ -126,7 +139,7 @@ def assemble(command: str, line_num: int) -> str:
                     print(command)
                     exit()
             for i in range (len(command.split())):
-                if command.split()[i][0:1] != "r":
+                if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
                     exit()
@@ -148,7 +161,7 @@ def assemble(command: str, line_num: int) -> str:
                     print(command)
                     exit()
             for i in range(len(command.split())):
-                if command.split()[i][0:1] != "r":
+                if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(
                         line_num) + " Syntax Error:")
                     print(command)
