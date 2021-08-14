@@ -33,8 +33,8 @@ while commands[0].startswith("var"):
 
     command_split = remove_items(command_split, '')
     if len(command_split) != 2:
-        print(command_split)
         print("Line " + str(len(variables)) + ": ERR: Syntax error")
+        print(commands[0])
         exit()
     else:
         variables[command_split[1]] = bin(code_size)[2:]
@@ -52,7 +52,7 @@ for index in range(len(commands)):
     command_split = command.split(" ")
     command_split = remove_items(command_split, '')
 
-    if command_split[0] == "label:":
+    if command_split[0].endswith(":"):
         if command_split[0][:-1].replace('_', "").isalnum():
             labels[command_split[0][:-1]] = bin(index)[2:]
 
