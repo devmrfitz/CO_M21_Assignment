@@ -1,0 +1,6 @@
+mul R0 R2 R3
+div R1 R2
+rs R5 $5
+ls R5 $0
+xor R3 R5 R4
+hlt
