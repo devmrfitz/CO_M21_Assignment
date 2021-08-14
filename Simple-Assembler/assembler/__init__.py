@@ -30,7 +30,10 @@ code_size = len(commands)-first_non_var
 # Store variables
 while commands[0].startswith("var"):
     command_split = commands[0].split(" ")
+
+    command_split = remove_items(command_split, '')
     if len(command_split) != 2:
+        print(command_split)
         print("Line " + str(len(variables)) + ": ERR: Syntax error")
         exit()
     else:
@@ -47,7 +50,9 @@ while commands[0].startswith("var"):
 for index in range(len(commands)):
     command = commands[index]
     command_split = command.split(" ")
-    if command_split[0].endswith(":"):
+    command_split = remove_items(command_split, '')
+
+    if command_split[0] == "label:":
         if command_split[0][:-1].replace('_', "").isalnum():
             labels[command_split[0][:-1]] = bin(index)[2:]
 
@@ -77,6 +82,7 @@ for index in range(len(commands) - 1):
 
     command_split = command.split(" ")
 
+    command_split = remove_items(command_split, '')
 
     if command_split[0] == "st" or command_split[0] == "ld":
         if len(command_split) != 3:
