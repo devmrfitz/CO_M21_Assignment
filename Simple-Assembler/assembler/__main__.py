@@ -12,7 +12,7 @@ def remove_items(input_list: list, item) -> list:
 
 
 def main():
-    commands = sys.stdin.read().split("\n")[:-1]
+    commands = sys.stdin.read().split("\n")
 
     assemblers = [part1.assemble, part2.assemble, part3.assemble]
 
