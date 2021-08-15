@@ -76,8 +76,8 @@ def assemble(command: str, line_num: int) -> str:
                 print(command)
                 exit()
             if command.split()[2][0:1] != "$":
-                print(command)
                 print("Line " + str(line_num) + ":Syntax Error: Illegal Immediate values")
+                print(command)
                 exit()
             elif 255 > int(command.split()[2][1:]) or int(command.split()[2][1:]) < 0:
                 print("Line " + str(line_num) + ": ERR: Wrong Limit used")
