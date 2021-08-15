@@ -18,12 +18,16 @@ def assemble(command: str, line_num: int) -> str:
                 command.split()[2]) + reg.get(command.split()[3])
             return ans
         else:
+            if (len(command.split()) != 4):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line "+str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            for i in range (len(command.split())):
+            for i in range(1, len(command.split())):
                 if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
@@ -39,12 +43,16 @@ def assemble(command: str, line_num: int) -> str:
                 command.split()[2])
             return ans
         else:
+            if (len(command.split()) != 3):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            for i in range (len(command.split())):
+            for i in range (1,len(command.split())):
                 if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
@@ -66,6 +74,10 @@ def assemble(command: str, line_num: int) -> str:
                 ans = "01000" + reg.get(command.split()[1]) + bin(int(command.split()[2][2:]))
                 return ans
         else:
+            if (len(command.split()) != 3):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
@@ -101,6 +113,10 @@ def assemble(command: str, line_num: int) -> str:
                 ans = "01001" + reg.get(command.split()[1]) + bin(int(command.split()[2][1:]))[2:]
                 return ans
         else:
+            if (len(command.split()) != 3):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
@@ -131,12 +147,16 @@ def assemble(command: str, line_num: int) -> str:
                   reg.get(command.split()[2]) + reg.get(command.split()[3])
             return ans
         else:
+            if (len(command.split()) != 4):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            for i in range (len(command.split())):
+            for i in range(1,len(command.split())):
                 if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
@@ -149,16 +169,20 @@ def assemble(command: str, line_num: int) -> str:
         if (reg.get(command.split()[1]) is not None) and \
             (reg.get(command.split()[2]) is not None) and \
                 (reg.get(command.split()[3]) is not None):
-            ans = "01010"+ "00" + reg.get(command.split()[1]) + \
+            ans = "01011"+ "00" + reg.get(command.split()[1]) + \
                   reg.get(command.split()[2]) + reg.get(command.split()[3])
             return ans
         else:
+            if (len(command.split()) != 4):
+                print("Error in Line " + str(line_num) + " Syntax Error:")
+                print(command)
+                exit()
             for i in command.split():
                 if i == "FLAGS":
                     print("Line " + str(line_num) + ": ERR: Illegal use of FLAGS")
                     print(command)
                     exit()
-            for i in range(len(command.split())):
+            for i in range(1,len(command.split())):
                 if command.split()[i][0:1] != "R":
                     print("Error in Line " + str(line_num) + " Syntax Error:")
                     print(command)
