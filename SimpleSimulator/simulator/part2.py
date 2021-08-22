@@ -1,5 +1,5 @@
 
-def simulation(command: str) -> str:
+def simulate(command: str) -> str:
     """
     :param command: add R0 R1 R2
     :return: 0000000000001010
