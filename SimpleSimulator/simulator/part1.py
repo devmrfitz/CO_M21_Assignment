@@ -38,7 +38,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         imm = instruction[7:]
         reg[instruction[5:8]] = "0" * 8 + imm
     if ins_type == "C":
-
+        pass
 
     else:
         return reg, mem, counter, False
