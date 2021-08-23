@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import matplotlib.pyplot as plt
 import sys
 
 import part1
@@ -30,22 +30,34 @@ for reg in REG:
     REG[reg] = "0" * 16
 
 PC = "0" * 8
-
+x = []
+y = []
+cycle_number = 0
 
 def main():
     simulators = [part1.simulate, part2.simulate, part3.simulate]
     simulators = [part3.simulate]
-    global REG, MEM, PC
+    global REG, MEM, PC, x, y, cycle_number
 
     while MEM[PC] != "1001100000000000":
         for simulator in simulators:
             PCprint = PC
+            x.append(cycle_number)
+            y.append(int(PC))
             REG, MEM, PC, is_modified = simulator(REG, MEM, PC)
             if is_modified:
                 print(PCprint, end=" ")
                 for reg in REG:
                     print(REG[reg], end=" ")
                 print()
+                if len(PC) == 2:
+                    x.append(cycle_number)
+                    y.append(int(PC[1]))
+                    PC = PC[0]
+                    cycle_number += 1
+                else:
+                    PC = PC[0]
+                    cycle_number += 1
                 break
     print(PC, end=" ")
     for reg in REG:
@@ -55,6 +67,12 @@ def main():
     for mem in MEM:
         print(MEM[mem])
 
+def Bonus(x: list, y: list):
+    plt.scatter(x, y, c = "blue")
+    plt.xlabel("Cycle Number")
+    plt.ylabel("Memory Address")
+    plt.title("Bonus")
+    plt.show()
 
 if __name__ == "__main__":
     try:
