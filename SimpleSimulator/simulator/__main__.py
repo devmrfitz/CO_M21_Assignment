@@ -39,9 +39,10 @@ def main():
 
     while MEM[PC] != "1001100000000000":
         for simulator in simulators:
+            PCprint = PC
             REG, MEM, PC, is_modified = simulator(REG, MEM, PC)
             if is_modified:
-                print(PC, end=" ")
+                print(PCprint, end=" ")
                 for reg in REG:
                     print(REG[reg], end=" ")
                 print()
