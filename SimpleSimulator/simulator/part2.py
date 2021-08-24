@@ -33,7 +33,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]))
-        reg3 = int(reg.get(mem[counter][13:16]))
+        reg3 = int(reg.get(mem[counter][13:]))
         quo = bin(int(reg2 / reg3))[2:]
         len_q = len(quo)
         rem = bin(int(reg2 % reg3))[2:]
@@ -42,7 +42,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg["001"] = "0" * (16 - len_r) + rem
         return reg, mem, [counter], True
 
-    elif isa.get(mem[counter][0:5]) == "rs":
+    elif isa.get(mem[counter][0:5]) == 'rs':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]), 2)
@@ -52,7 +52,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
             reg[reg1] = "0"*imm + result
         return reg, mem, [counter], True
 
-    elif isa.get(mem[counter][0:5]) == "ls":
+    elif isa.get(mem[counter][0:5]) == 'ls':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]), 2)
@@ -62,7 +62,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
             reg[reg1] = result[-16:-1]
         return reg, mem, [counter], True
 
-    elif isa.get(mem[counter][0:5]) == "xor":
+    elif isa.get(mem[counter][0:5]) == 'xor':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]))
@@ -71,7 +71,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg[reg1] = reg2 ^ reg3
         return reg, mem, [counter], True
 
-    elif isa.get(mem[counter][0:5]) == "or":
+    elif isa.get(mem[counter][0:5]) == 'or':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]))
