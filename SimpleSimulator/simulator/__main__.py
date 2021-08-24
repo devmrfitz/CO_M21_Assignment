@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import sys
 
 import part1
@@ -36,7 +36,6 @@ cycle_number = 0
 
 def main():
     simulators = [part1.simulate, part2.simulate, part3.simulate]
-    simulators = [part3.simulate]
     global REG, MEM, PC, x, y, cycle_number
 
     while MEM[PC] != "1001100000000000":
@@ -67,12 +66,12 @@ def main():
     for mem in MEM:
         print(MEM[mem])
 
-def Bonus(x: list, y: list):
-    plt.scatter(x, y, c = "blue")
-    plt.xlabel("Cycle Number")
-    plt.ylabel("Memory Address")
-    plt.title("Bonus")
-    plt.show()
+# def Bonus(x: list, y: list):
+#     plt.scatter(x, y, c = "blue")
+#     plt.xlabel("Cycle Number")
+#     plt.ylabel("Memory Address")
+#     plt.title("Bonus")
+#     plt.show()
 
 if __name__ == "__main__":
     try:
