@@ -1,0 +1,11 @@
+var a 
+and R1 R2 R3
+and R2 R4 R5
+not R0 R5
+jmp label1
+cmp R0 R2
+label1: not R0 R5
+jlt label1
+jgt label1
+je hsl
+hsl: hlt
