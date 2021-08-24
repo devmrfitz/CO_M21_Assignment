@@ -12,6 +12,7 @@ ISA = {
 
 FLAGS = "111"
 
+
 def bitwise_and(a: str, b: str):
     return "".join([str(int(a[i]) * int(b[i])) for i in range(len(a))])
 
@@ -29,11 +30,11 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     :return: Modified values of the parameters and a boolean stating if command was found
     """
     flags_old = reg[FLAGS]
-    reg[FLAGS] = "0"*16
+    reg[FLAGS] = "0" * 16
     command = mem.get(counter)
     opcode = command[:5]
     new_counter = bin(int(counter, 2) + 1)[2:]
-    new_counter = "0"*(8-len(new_counter)) + new_counter
+    new_counter = "0" * (8 - len(new_counter)) + new_counter
     is_modified = True
     if opcode == "01100":
         reg1 = command[7:10]
@@ -48,11 +49,11 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg1 = command[10:13]
         reg2 = command[13:16]
         if int(reg[reg1]) < int(reg[reg2]):
-            reg[FLAGS] = "0"*13 + "1" + "00"
+            reg[FLAGS] = "0" * 13 + "1" + "00"
         elif reg[reg1] == reg[reg2]:
-            reg[FLAGS] = "0"*15 + "1"
+            reg[FLAGS] = "0" * 15 + "1"
         else:
-            reg[FLAGS] = "0"*14 + "1" + "0"
+            reg[FLAGS] = "0" * 14 + "1" + "0"
     elif opcode == "01111":
         new_counter = command[-8:]
     elif opcode == "10000":
@@ -68,5 +69,3 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         is_modified = False
 
     return reg, mem, [new_counter], is_modified
-
-
