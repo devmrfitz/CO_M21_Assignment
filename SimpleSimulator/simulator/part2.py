@@ -41,17 +41,19 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     elif isa.get(mem[counter][0:5]) == "rs":
         counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
+        reg1 = int(reg.get(mem[counter][7:10]))
         reg2 = int(reg.get(mem[counter][10:13]))
-        imm = int(reg.get(mem[counter][13:]))
-        reg["001"] = reg2 >> int(imm)
+        imm = int(mem[counter][13:])
+        reg[reg1] = reg2 >> int(imm)
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "ls":
         counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
+        reg1 = int(reg.get(mem[counter][7:10]))
         reg2 = int(reg.get(mem[counter][10:13]))
-        imm = int(reg.get(mem[counter][13:]))
-        reg["001"] = reg2 << int(imm)
+        imm = int(mem[counter][13:])
+        reg[reg1] = reg2 << int(imm)
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "xor":
