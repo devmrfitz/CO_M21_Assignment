@@ -4,6 +4,8 @@ isa = {"00000": ("add", "A"), "00001": ("sub", "A"), "00010": ("movImm", "B"),
        "00011": ("movReg", "C"),
        "00100": ("ld", "D"), "00101": ("st", "D")}
 
+FLAGS = "111"
+
 
 def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     """
@@ -12,9 +14,13 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         :param counter: A string containing the value of program counter in binary
         :return: Modified values of the parameters and a boolean stating if command was found
     """
+    old_flags = reg[FLAGS]
+    reg[FLAGS] = "0" * 16
     instruction = mem[counter]
     opcode = instruction[0:5]
-    ins_type = isa[opcode][1]
+    ins_type = isa.get(opcode)
+    if ins_type:
+        ins_type = ins_type[1]
     if ins_type == "A":
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
@@ -27,11 +33,11 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
                 reg[instruction[7:10]] = "0" * (16 - length) + result
             else:
                 reg[instruction[7:10]] = result[length - 16:]
-                reg["FLAGS"] = "0" * 12 + "1" + "0" * 3
+                reg[FLAGS] = "0" * 12 + "1" + "0" * 3
         elif isa.get(opcode)[0] == "sub":
             if reg2 < reg3:
                 reg[instruction[7:10]] = "0" * 16
-                reg["FLAGS"] = "0" * 12 + "1" + "0" * 3
+                reg[FLAGS] = "0" * 12 + "1" + "0" * 3
             else:
                 result = bin(reg2 - reg3)[2:]
                 length = len(result)
@@ -45,7 +51,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
     elif ins_type == "C":
         reg2 = reg.get(instruction[13:])
-        reg[instruction[10:13]] = reg2
+        reg[instruction[10:13]] = reg2 if instruction[13:] != FLAGS else old_flags
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         return reg, mem, [counter], True
@@ -63,4 +69,5 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
             counter = "0" * (8 - len(counter)) + counter
             return reg, mem, [counter, instruction[8:]], True
     else:
+        reg[FLAGS] = old_flags
         return reg, mem, counter, False

@@ -1,6 +1,8 @@
 isa = {"00110": "mul", "00111": "div", "01000": "rs", "01001": "ls",
        "01010": "xor", "01011": "or"}
 
+FLAGS = "111"
+
 
 def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     """
@@ -9,6 +11,9 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     :param counter: A string containing the value of program counter in binary
     :return: Modified values of the parameters and a boolean stating if command was found
     """
+
+    old_flags = reg[FLAGS]
+    reg[FLAGS] = "0" * 16
 
     if isa.get(mem[counter][0:5]) == 'mul':
         counter = bin(int(counter, 2) + 1)[2:]
@@ -20,7 +25,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
             reg[mem[counter][7:10]] = "0" * (16 - len(result)) + result
         else:
             reg[mem[counter][7:10]] = result[len(result) - 16:]
-            reg["FLAGS"] = "0" * 12 + "1" + "0" * 3
+            reg[FLAGS] = "0" * 12 + "1" + "0" * 3
 
         return reg, mem, [counter], True
 
@@ -76,4 +81,5 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     else:
+        reg[FLAGS] = old_flags
         return reg, mem, [counter], False

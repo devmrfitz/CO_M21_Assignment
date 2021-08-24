@@ -6,17 +6,13 @@ import part1
 import part2
 import part3
 
-
-def remove_items(input_list: list, item) -> list:
-    return [i for i in input_list if i != item]
-
-
-assembled_code = remove_items(sys.stdin.read().split("\n"), '')
-
 MEM = {}  # A dictionary that has mem_address as keys and the memory as values
+hlt = True
 for mem_address in range(256):
-    if len(assembled_code) > mem_address:
-        value = assembled_code[mem_address]
+    if hlt:
+        value = input()
+        if value == "1001100000000000":
+            hlt = False
     else:
         value = "0" * 16
     bin_address = bin(mem_address)[2:]
@@ -44,11 +40,7 @@ def main():
             x.append(cycle_number)
             y.append(int(PC))
             REG, MEM, PC, is_modified = simulator(REG, MEM, PC)
-            if is_modified:
-                print(PCprint, end=" ")
-                for reg in REG:
-                    print(REG[reg], end=" ")
-                print()
+            if type(PC) == list:
                 if len(PC) == 2:
                     x.append(cycle_number)
                     y.append(int(PC[1]))
@@ -57,6 +49,11 @@ def main():
                 else:
                     PC = PC[0]
                     cycle_number += 1
+            if is_modified:
+                print(PCprint, end=" ")
+                for reg in REG:
+                    print(REG[reg], end=" ")
+                print()
                 break
     print(PC, end=" ")
     for reg in REG:
@@ -74,8 +71,8 @@ def main():
 #     plt.show()
 
 if __name__ == "__main__":
-    try:
+    # try:
         main()
-    except Exception as e:
-        print(e)
-        exit()
+    # except Exception as e:
+    #     print(e)
+    #     exit()
