@@ -3,6 +3,7 @@
 isa = {"00000": ("add", "A"), "00001": ("sub", "A"), "00010": ("movImm", "B"), "00011": ("movReg", "C"),
        "00100": ("ld", "D"), "00101": ("st", "D")}
 
+
 def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     """
         :param reg: A dictionary containing contents of all registers

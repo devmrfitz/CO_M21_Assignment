@@ -1,51 +1,45 @@
+isa = {"00110": "mul", "00111": "div", "01000": "rs", "01001": "ls",
+       "01010": "xor", "01011": "or"}
 
-def simulate(command: str) -> str:
+
+def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     """
-    :param command: add R0 R1 R2
-    :return: 0000000000001010
+    :param reg: A dictionary containing contents of all registers
+    :param mem: A dictionary containing memory contents by address
+    :param counter: A string containing the value of program counter in binary
+    :return: Modified values of the parameters and a boolean stating if command was found
     """
 
-    reg = {"R0": "000", "R1": "001", "R2": "010", "R3": "011", "R4": "100",
-           "R5": "101", "R6": "110"}
-    if command.split()[0] == "mul" and len(command.split()) == 4:
-        if ((reg.get(command.split()[1]) is not None) and
-                (reg.get(command.split()[2]) is not None) and
-                (reg.get(command.split()[3]) is not None)):
-            ans = "00110" + reg.get(command.split()[1]) + reg.get(
-                command.split()[2]) + reg.get(command.split()[3])
-            return ans
+    if isa.get(mem[counter][0:5]) == 'mul':
+        counter = bin(int(counter) + 1)[2:]
+        counter = "0" * (8 - len(counter)) + counter
+        reg2 = int(reg.get(mem[counter][10:13]))
+        reg3 = int(reg.get(mem[counter][13:16]))
+        result = bin(reg2 * reg3)[2:]
+        length = len(result)
+        if length <= 16:
+            reg[mem[counter][7:10]] = "0" * (16 - length) + result
         else:
-            return ""
+            reg[mem[counter][7:10]] = result[length - 16:]
+            reg["FLAGS"] = "0" * 12 + "1" + "0" * 3
 
-    elif command.split()[0] == "div" and len(command.split()) == 3:
-        if ((reg.get(command.split()[1]) is not None) and
-                (reg.get(command.split()[2]) is not None)):
-            ans = "00111" + reg.get(command.split()[1]) + reg.get(
-                command.split()[2])
-            return ans
-        else:
-            return ""
+        return reg, mem, [counter], False
 
-    elif command.split()[0] == "rs" and len(command.split()) == 3:
-        if reg.get(command.split()[1]) is not None:
-            temp = int(command.split()[1][1:]) >> int(command.split()[2][1:])
-            ans = "01000" + str(temp)
-            return ans
-        else:
-            return ""
+    elif isa.get(mem[counter][0:5]) == 'div':
+        counter = bin(int(counter) + 1)[2:]
+        counter = "0" * (8 - len(counter)) + counter
+        reg2 = int(reg.get(mem[counter][10:13]))
+        reg3 = int(reg.get(mem[counter][13:16]))
+        quo = bin(int(reg2 / reg3))[2:]
+        len_q = len(quo)
+        rem = bin(int(reg2 % reg3))[2:]
+        len_r = len(rem)
+        reg["000"] = "0" * (16 - len_q) + quo
+        reg["001"] = "0" * (16 - len_r) + rem
 
-    elif command.split()[0] == "ls" and len(command.split()) == 3:
-        if reg.get(command.split()[1]) is not None:
-            temp = int(command.split()[1][1:]) << int(command.split()[2][1:])
-            ans = "01001" + str(temp)
-            return ans
-        else:
-            return ""
+        return reg, mem, [counter], False
 
-    elif command.split()[0] == "xor" and len(command.split()) == 4:
-        if (reg.get(command.split()[1]) is not None) and \
-            (reg.get(command.split()[2]) is not None) and \
-                (reg.get(command.split()[3]) is not None):
-            ans = "01010"
+    # elif isa.get(mem[counter][0:5])
 
-    return "0"
+    else:
+        return reg, mem, counter, False
