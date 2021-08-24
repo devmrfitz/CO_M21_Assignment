@@ -12,7 +12,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     """
 
     if isa.get(mem[counter][0:5]) == 'mul':
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]))
         reg3 = int(reg.get(mem[counter][13:16]))
@@ -26,7 +26,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == 'div':
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]))
         reg3 = int(reg.get(mem[counter][13:16]))
@@ -39,7 +39,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "rs":
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]))
         imm = int(reg.get(mem[counter][13:]))
@@ -47,7 +47,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "ls":
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]))
         imm = int(reg.get(mem[counter][13:]))
@@ -55,7 +55,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "xor":
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]))
         reg2 = int(reg.get(mem[counter][10:13]))
@@ -64,7 +64,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "or":
-        counter = bin(int(counter) + 1)[2:]
+        counter = bin(int(counter,2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]))
         reg2 = int(reg.get(mem[counter][10:13]))
