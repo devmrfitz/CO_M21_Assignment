@@ -67,6 +67,6 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     else:
         is_modified = False
 
-    return reg, mem, new_counter, is_modified
+    return reg, mem, [new_counter], is_modified
 
 

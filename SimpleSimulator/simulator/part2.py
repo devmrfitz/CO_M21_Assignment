@@ -23,7 +23,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
             reg[mem[counter][7:10]] = result[len(result) - 16:]
             reg["FLAGS"] = "0" * 12 + "1" + "0" * 3
 
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == 'div':
         counter = bin(int(counter) + 1)[2:]
@@ -36,7 +36,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         len_r = len(rem)
         reg["000"] = "0" * (16 - len_q) + quo
         reg["001"] = "0" * (16 - len_r) + rem
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "rs":
         counter = bin(int(counter) + 1)[2:]
@@ -44,7 +44,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg2 = int(reg.get(mem[counter][10:13]))
         imm = int(reg.get(mem[counter][13:]))
         reg["001"] = reg2 >> int(imm)
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "ls":
         counter = bin(int(counter) + 1)[2:]
@@ -52,7 +52,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg2 = int(reg.get(mem[counter][10:13]))
         imm = int(reg.get(mem[counter][13:]))
         reg["001"] = reg2 << int(imm)
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "xor":
         counter = bin(int(counter) + 1)[2:]
@@ -61,7 +61,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg2 = int(reg.get(mem[counter][10:13]))
         reg3 = int(reg.get(mem[counter][13:]))
         reg[reg1] = reg2 ^ reg3
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "or":
         counter = bin(int(counter) + 1)[2:]
@@ -70,7 +70,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg2 = int(reg.get(mem[counter][10:13]))
         reg3 = int(reg.get(mem[counter][13:]))
         reg[reg1] = reg2 or reg3
-        return reg, mem, counter, False
+        return reg, mem, [counter], True
 
     else:
-        return reg, mem, counter, False
+        return reg, mem, [counter], False
