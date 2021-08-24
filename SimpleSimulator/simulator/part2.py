@@ -42,7 +42,9 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]), 2)
         imm = int(mem[counter][13:], 2)
-        reg[reg1] = bin(reg1 >> imm)[2:0]
+        result = bin(reg1 >> imm)[2:0]
+        if len(result) > 16:
+            reg[reg1] = "0"*imm + result
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "ls":
@@ -50,7 +52,9 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = int(reg.get(mem[counter][7:10]), 2)
         imm = int(mem[counter][13:], 2)
-        reg[reg1] = bin(imm << reg1)[2:0]
+        result = bin(imm << reg1)[2:0]
+        if len(result) > 16:
+            reg[reg1] = result[-16:-1]
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "xor":
