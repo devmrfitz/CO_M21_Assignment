@@ -40,10 +40,9 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     elif isa.get(mem[counter][0:5]) == "rs":
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
-        reg1 = int(reg.get(mem[counter][7:10]))
-        reg2 = int(reg.get(mem[counter][10:13]))
-        imm = int(mem[counter][13:])
-        reg[reg1] = reg2 >> int(imm)
+        reg1 = int(reg.get(mem[counter][7:10]),2)
+        imm = int(mem[counter][13:],2)
+        reg[reg1] = bin(reg1 >> imm)[2:0]
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == "ls":
