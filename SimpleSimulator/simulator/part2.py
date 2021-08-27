@@ -70,7 +70,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg1 = mem[old_counter][7:10]
         reg2 = int(reg.get(mem[old_counter][10:13]), 2)
         reg3 = int(reg.get(mem[old_counter][13:]), 2)
-        result = bin(reg2 ^ reg3)
+        result = bin(reg2 ^ reg3)[2:]
         if len(result) <= 16:
             reg[reg1] = "0" * (16-len(result)) + result
         return reg, mem, [counter], True
@@ -81,7 +81,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         reg1 = mem[old_counter][7:10]
         reg2 = int(reg.get(mem[old_counter][10:13]), 2)
         reg3 = int(reg.get(mem[old_counter][13:]), 2)
-        result = bin(reg2 | reg3)
+        result = bin(reg2 | reg3)[2:]
         if len(result) <= 16:
             reg[reg1] = "0" * (16-len(result)) + result
         return reg, mem, [counter], True
