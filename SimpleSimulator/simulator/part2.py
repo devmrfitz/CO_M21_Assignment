@@ -34,7 +34,9 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
         reg2 = int(reg.get(mem[counter][10:13]), 2)
+        # print(reg.get(mem[counter][10:13]))
         reg3 = int(reg.get(mem[counter][13:]), 2)
+        # print(reg.get(mem[counter][10:13]))
         quo = bin(int(reg2 / reg3))[2:]
         len_q = len(quo)
         rem = bin(int(reg2 % reg3))[2:]
