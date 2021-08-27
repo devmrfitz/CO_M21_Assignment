@@ -61,7 +61,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         imm = int(mem[old_counter][8:], 2)
         result = bin(imm << int(reg[reg1], 2))[2:]
         if len(result) >= 16:
-            reg[reg1] = result[-16:-1]
+            reg[reg1] = result[-16:-1:-1]
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == 'xor':
