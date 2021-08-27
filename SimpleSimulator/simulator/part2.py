@@ -49,7 +49,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = (reg.get(mem[old_counter][5:8]))
         imm = int(mem[old_counter][8:], 2)
-        result = bin(int(reg1, 2) >> imm)[2:0]
+        result = bin(int(reg[reg1], 2) >> imm)[2:]
         if len(result) <= 16:
             reg[reg1] = "0" * (16-len(result)) + result
         return reg, mem, [counter], True
@@ -59,7 +59,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = (reg.get(mem[old_counter][5:8]))
         imm = int(mem[old_counter][8:], 2)
-        result = bin(imm << int(reg1, 2))[2:0]
+        result = bin(imm << int(reg[reg1], 2))[2:]
         if len(result) >= 16:
             reg[reg1] = result[-16:-1]
         return reg, mem, [counter], True
