@@ -50,7 +50,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         imm = int(mem[counter][8:], 2)
         result = bin(reg1 >> imm)[2:0]
         if len(result) <= 16:
-            reg[reg1] = "0" * (8-len(result)) + result
+            reg[reg1] = "0" * (16-len(result)) + result
         return reg, mem, [counter], True
 
     elif isa.get(mem[counter][0:5]) == 'ls':
