@@ -24,8 +24,8 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     if ins_type == "A":
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
-        reg2 = int(reg.get(instruction[10:13], 2))
-        reg3 = int(reg.get(instruction[13:16], 2))
+        reg2 = int(reg.get(instruction[10:13]), 2)
+        reg3 = int(reg.get(instruction[13:16]), 2)
         if isa.get(opcode)[0] == "add":
             result = bin(reg2 + reg3)[2:]
             length = len(result)

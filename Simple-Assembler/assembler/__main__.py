@@ -20,7 +20,10 @@ def main():
 
     labels = {}
 
+    # Cleanup
     commands = remove_items(commands, "")
+    for index in range(len(commands)):
+        commands[index] = " ".join(commands[index].split())
 
     first_non_var = 0
     while first_non_var < len(commands) and commands[first_non_var].startswith("var"):

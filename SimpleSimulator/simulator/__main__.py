@@ -85,6 +85,7 @@ def main():
     MEM.set_cycle(-1)
 
     print(PC, end=" ")
+    REG["111"] = "0"*16
     for reg in REG:
         print(REG[reg], end=" ")
     print()

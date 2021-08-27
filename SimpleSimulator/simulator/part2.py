@@ -20,8 +20,8 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     if isa.get(mem[counter][0:5]) == 'mul':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
-        reg2 = int(reg.get(mem[old_counter][10:13]))
-        reg3 = int(reg.get(mem[old_counter][13:]))
+        reg2 = int(reg.get(mem[old_counter][10:13]), 2)
+        reg3 = int(reg.get(mem[old_counter][13:]), 2)
         result = bin(reg2 * reg3)[2:]
         if len(result) <= 16:
             reg[mem[old_counter][7:10]] = "0" * (16 - len(result)) + result
