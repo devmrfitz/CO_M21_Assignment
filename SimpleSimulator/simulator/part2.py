@@ -33,8 +33,8 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
     elif isa.get(mem[counter][0:5]) == 'div':
         counter = bin(int(counter, 2) + 1)[2:]
         counter = "0" * (8 - len(counter)) + counter
-        reg2 = int(reg.get(mem[counter][10:13]))
-        reg3 = int(reg.get(mem[counter][13:]))
+        reg2 = int(reg.get(mem[counter][10:13]), 2)
+        reg3 = int(reg.get(mem[counter][13:]), 2)
         quo = bin(int(reg2 / reg3))[2:]
         len_q = len(quo)
         rem = bin(int(reg2 % reg3))[2:]
@@ -48,7 +48,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = mem[counter][5:8]
         imm = int(mem[counter][8:], 2)
-        result = bin(reg1 >> imm)[2:0]
+        result = bin(int(reg1, 2) >> imm)[2:0]
         if len(result) <= 16:
             reg[reg1] = "0" * (16-len(result)) + result
         return reg, mem, [counter], True
@@ -58,7 +58,7 @@ def simulate(reg: dict, mem: dict, counter: str) -> tuple:
         counter = "0" * (8 - len(counter)) + counter
         reg1 = mem[counter][5:8]
         imm = int(mem[counter][8:], 2)
-        result = bin(imm << reg1)[2:0]
+        result = bin(imm << int(reg1, 2))[2:0]
         if len(result) >= 16:
             reg[reg1] = result[-16:-1]
         return reg, mem, [counter], True
